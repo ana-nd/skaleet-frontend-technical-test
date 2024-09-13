@@ -53,14 +53,18 @@ const HomeScreen: React.FC<HomeScreenProps> = ({ navigation }) => {
       <Text style={styles.balanceText}>
         Current Balance: ${balance.toFixed(2)}
       </Text>
-      <Button
-        title="Add Transaction"
-        onPress={() => navigation.navigate('AddTransaction')}
-      />
-      <Button
-        title="Add Beneficiary"
-        onPress={() => navigation.navigate('AddBeneficiary')}
-      />
+      <View style={styles.buttonContainer}>
+        <Button
+          title="Add Transaction"
+          onPress={() => navigation.navigate('AddTransaction')}
+        />
+      </View>
+      <View style={styles.buttonContainer}>
+        <Button
+          title="Add Beneficiary"
+          onPress={() => navigation.navigate('AddBeneficiary')}
+        />
+      </View>
       {transactions.length > 0 && (
         <View style={styles.flatListContainer}>
           <Text style={styles.listTitle}>Transactions</Text>
@@ -96,6 +100,9 @@ const styles = StyleSheet.create({
     fontSize: 18,
     fontWeight: 'bold',
     marginBottom: 20,
+  },
+  buttonContainer: {
+    marginVertical: 8
   },
   flatListContainer: {
     width: '100%',
