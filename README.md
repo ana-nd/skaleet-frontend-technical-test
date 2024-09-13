@@ -1,22 +1,75 @@
-# Introduction
+# Skaleet Frontend Technical Test
 
-We're thrilled to have you at this stage of our selection process! This test is designed to assess your skills and approach to problem-solving in a practical scenario. Please carefully follow the instructions below and ensure you read through the entire document. Good luck!
+This is a React Native application that allows users to manage transactions and beneficiaries.
 
-# Set up the Project
+## Features
+- Add and list transactions
+- Add and list beneficiaries
+- Validate IBAN numbers using an external API
+- Local state management using context
 
-A significant challenge when working with React Native is setting up a complete environment before being able to run the project. We have intentionally omitted these instructions to assess your ability to independently set up said environment.
+## Prerequisites
 
-# Technical Test
+Make sure you have the following installed:
+- [Node.js](https://nodejs.org/)
+- [npm](https://www.npmjs.com/)
+- Xcode (for iOS development)
+- Android Studio (for Android development)
+- [CocoaPods](https://cocoapods.org/) (for iOS dependencies)
 
-You will be working on an application that facilitates transactions to beneficiaries. To successfully complete the test, you will need to implement the following features:
- - Introduce a new page to create a beneficiary, including fields for their first name, last name, and IBAN. Additionally, incorporate an IBAN validator to ensure the IBAN's validity.
- - Enable the selection of a beneficiary from a list when making a transaction.
- - Preserve the state of the application so that upon reopening, the list of beneficiaries, transaction history, and balance are retained.
+## Installation
 
-Note: you have free rein in how you want to implement this test, give it you best shot!
+### 1. Clone the repository
+```bash
+git clone git@github.com:ana-nd/skaleet-frontend-technical-test.git
+cd skaleet-frontend-technical-test
+```
 
-# Result
+### 2. Install project dependencies
 
-Please share with us your Git repository where you have stored your implemented solution. Document all the commands needed to install and launch this project, excluding the installation of any external SDKs/platforms, our focus will remain strictly on this project.
+```bash
+npm install
+```
 
-We hope that you will enjoy taking this test, best of luck!
+### 3. Install iOS Pods (for iOS)
+
+Navigate to the ios directory and install CocoaPods dependencies:
+
+```bash
+cd ios
+pod install
+cd ..
+```
+
+## Running the Application
+
+### Android
+
+```bash
+npm run android
+```
+
+### iOS
+
+```bash
+npm run ios
+```
+
+## Running Metro Bundler
+
+Metro bundler is automatically started when you run the project. However, if you want to run it manually:
+
+```bash
+npm start
+npm start --reset-cache // to clear the cache
+```
+
+## Example IBANs for Testing
+
+Here are some valid IBANs you can use to test the IBAN validation feature:
+
+    Germany (DE): DE89370400440532013000
+    United Kingdom (GB): GB82WEST12345698765432
+    France (FR): FR1420041010050500013M02606
+    Spain (ES): ES9121000418450200051332
+    Netherlands (NL): NL91ABNA0417164300

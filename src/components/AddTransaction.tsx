@@ -6,6 +6,7 @@ import { RootStackParamList, TransactionContextType } from '../utils/types';
 import { NativeStackNavigationProp } from '@react-navigation/native-stack';
 import { isEmpty } from '../utils/utils';
 import { useTransactions } from '../TransactionContext';
+import { validateIban } from '../api/iban-validator';
 
 // Define types for component props
 type AddTransactionNavigationProp =
@@ -47,7 +48,7 @@ const AddTransaction: React.FC<AddTransactionProps> = ({ navigation }) => {
   /**
    * @description Function to handle adding a new transaction
    */
-  const handleTransaction = () => {
+  const handleTransaction = async () => {
     if (
       isEmpty(amount) ||
       isEmpty(name) ||
@@ -59,6 +60,12 @@ const AddTransaction: React.FC<AddTransactionProps> = ({ navigation }) => {
         'Please enter all the details in fields.',
       );
     }
+
+    const isValid = await validateIban(iban);
+    if (!isValid) {
+      return Alert.alert('Invalid IBAN!', 'The provided IBAN is not valid.');
+    }
+
     const accountDetails = { name, iban };
     addTransaction(amount, accountDetails);
     navigation.goBack();
