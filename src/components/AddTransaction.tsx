@@ -61,6 +61,11 @@ const AddTransaction: React.FC<AddTransactionProps> = ({ navigation }) => {
       );
     }
 
+    // check if amount is not a number
+    if(typeof amount !== 'number') {
+      return Alert.alert("Error!", 'Please provide correct amount')
+    }
+
     const isValid = await validateIban(iban);
     if (!isValid) {
       return Alert.alert('Invalid IBAN!', 'The provided IBAN is not valid.');

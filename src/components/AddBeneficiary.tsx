@@ -19,7 +19,7 @@ const AddBeneficiary: React.FC<AddBeneficiaryProps> = ({ navigation }) => {
   const [firstName, setFirstName] = useState<string>('');
   const [lastName, setLastName] = useState<string>('');
   const [iban, setIban] = useState<string>('');
-  const { addBeneficiary } = useTransactions();
+  const { addBeneficiary, beneficiaries } = useTransactions();
 
   /**
    * @description Handles the process of adding a new beneficiary.
@@ -36,6 +36,28 @@ const AddBeneficiary: React.FC<AddBeneficiaryProps> = ({ navigation }) => {
     const isValid = await validateIban(iban);
     if (!isValid) {
       return Alert.alert('Invalid IBAN!', 'The provided IBAN is not valid.');
+    }
+
+    // validate unique beneficiaries
+    const fullName = firstName.toLowerCase() + lastName.toLowerCase();
+    // beneficiaries.forEach(item => {
+    //   const { beneficiariesData } = item;
+    //   const exisitngName =
+    //     beneficiariesData.firstName.toLowerCase() +
+    //     beneficiariesData.lastName.toLowerCase();
+    //   if (exisitngName === fullName) {
+    //     return Alert.alert('Error', 'Beneficiary already exists');
+    //   }
+    // });
+
+    const matchingBenef = beneficiaries.filter(
+      item =>
+        item.beneficiariesData.firstName.toLowerCase() +
+          item.beneficiariesData.lastName.toLowerCase() ===
+        fullName,
+    );
+    if (!isEmpty(matchingBenef) && matchingBenef.length > 0) {
+      return Alert.alert('Error', 'Beneficiary already exists');
     }
 
     const obj: BeneficiaryData = {
